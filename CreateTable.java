@@ -62,6 +62,7 @@ public class CreateTable {
         
         con.close();
     }
+    
     /**
      * Creates the table for customers. only call ONCE
      * @param con
