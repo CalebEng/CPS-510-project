@@ -62,7 +62,7 @@ public class CreateTable {
         
         con.close();
     }
-    
+
     /**
      * Creates the table for customers. only call ONCE
      * @param con
@@ -76,7 +76,7 @@ public class CreateTable {
             +"NAME VARCHAR2(20) NOT NULL,"
             +"PHONE_NUMBER INT NOT NULL,"
             +"CREDIT_CARD INT NOT NULL,"
-            +"VALET INT DEFAULT 0,"
+            +"VALET INT DEFAULT 0 NOT NULL,"
             +"PRIMARY KEY (ID))";
         stm.execute(query);
         stm.close();
