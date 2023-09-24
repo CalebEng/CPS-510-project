@@ -60,7 +60,20 @@ public class CreateTable {
             +"VALET INT DEFAULT 0,"
             +"PRIMARY KEY (ID))";
         stm.execute(query);
+        stm.close();
         System.out.println("Customer table Created...");     
 
+        //creating the room table
+        Statement stm2 = con.createStatement();
+
+        String query2 = "create table ROOM(" 
+            + "ROOM_ID INT NOT NULL,"
+            + "ROOM_TYPE VARCHAR(15) NOT NULL,"
+            + "CAPACITY VARCHAR(4) NOT NULL,"
+            + "AVAILABILITY VARCHAR(10) DEFAULT Vacant,"
+            + "PRICE INT NOT NULL,"
+            + "PRIMARY KEY (ROOM_ID))";
+        stm2.execute(query2);
+        System.out.println("Customer table Created2...");    
     }
 }
