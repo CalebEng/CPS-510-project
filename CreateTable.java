@@ -166,7 +166,19 @@ public class CreateTable {
      * @throws SQLException
      */
     private static void createOnlineBookingTable(Connection con)throws SQLException{
+        Statement stm = con.createStatement();
 
+        String query = "create table ONLINEBOOKING("
+            + "B_ID INT NOT NULL,"
+            + "ID INT NOT NULL,"
+            + "NUMBER_OF_GUESTS INT NOT NULL,"
+            + "CHECK_IN date NOT NULL,"
+            + "CHECK_OUT date NOT NULL,"
+            + "ROOM_ID INT NOT NULL,"
+            + "PRIMARY KEY (B_ID))";
+        stm.execute(query);
+        stm.close();
+        System.out.println("Online Booking table Created...");
     }
 
 
@@ -176,6 +188,15 @@ public class CreateTable {
      * @throws SQLException
      */
     private static void createValetTable(Connection con)throws SQLException{
+        Statement stm = con.createStatement();
 
+        String query = "create table VALET("
+            + "L_PLATE INT NOT NULL,"
+            + "ID INT NOT NULL,"
+            + "E_ID INT NOT NULL,"
+            + "PRIMARY KEY (L_PLATE))";
+        stm.execute(query);
+        stm.close();
+        System.out.println("Valet table Created...");
     }
 }
