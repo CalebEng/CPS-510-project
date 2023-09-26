@@ -51,13 +51,13 @@ public class CreateTable {
         //edit your needed createtion calls here. only call them once each. 
         //comment the ones you dont need out.
         //-------------------------------------------------------------------------
-        createCustomerTable(con);
-        createRoomTable(con);
-        createEmployeeTable(con);
-        createParkingSpotTable(con);
-        createAmenitiesTable(con);
+        //createCustomerTable(con);
+        //createRoomTable(con);
+        //createEmployeeTable(con);
+        //createParkingSpotTable(con);
+        //createAmenitiesTable(con);
         createOnlineBookingTable(con);
-        createValetTable(con);
+        //createValetTable(con);
         //-------------------------------------------------------------------------
        
         con.close();
@@ -171,12 +171,14 @@ public class CreateTable {
         String query = "create table ONLINEBOOKING("
             + "B_ID INT NOT NULL,"
             + "ID INT NOT NULL,"
+            + "A_ID INT NOT NULL,"
             + "NUMBER_OF_GUESTS INT NOT NULL,"
             + "CHECK_IN date NOT NULL,"
             + "CHECK_OUT date NOT NULL,"
             + "ROOM_ID INT NOT NULL,"
             + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
             + "FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ROOM_ID),"
+            + "FOREIGN KEY (A_ID) REFERENCES AMENITIES(ID),"
             + "PRIMARY KEY (B_ID))";
 
         stm.execute(query);
