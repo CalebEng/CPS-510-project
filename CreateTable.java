@@ -56,10 +56,16 @@ public class CreateTable {
         //createEmployeeTable(con);
         //createParkingSpotTable(con);
         //createAmenitiesTable(con);
-        createOnlineBookingTable(con);
+        //createOnlineBookingTable(con);
         //createValetTable(con);
+        //createBooked(con);
+        //createResered(con);
+        //createExtras(con);
+        //createParked(con);
+        //createINUSE(con);
         //-------------------------------------------------------------------------
        
+
         con.close();
     }
 
@@ -199,7 +205,7 @@ public class CreateTable {
             + "L_PLATE VARCHAR(20) NOT NULL,"
             + "ID INT NOT NULL,"
             + "E_ID INT NOT NULL,"
-            + "SPOT_NUMB INT NOT NULL"
+            + "SPOT_NUMB INT NOT NULL,"
             + "FOREIGN KEY (SPOT_NUMB) REFERENCES PARKINGSPOT(SPOT_NUMBER),"
             + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
             + "FOREIGN KEY (E_ID) REFERENCES EMPLOYEE(E_ID),"
@@ -220,10 +226,9 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table BOOKED("
-            + "ID INT NOT NULL,"
-            + "B_ID INT NOT NULL,"
-            + "PRIMARY KEY(ID) REFERENCES CUSTOMER(ID),"
-            + "PRIMARY KEY(B_ED) REFERENCES ONLINEBOOKING(B_ID))";
+            + "ID INT REFERENCES CUSTOMER(ID) NOT NULL,"
+            + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID),"
+            + "PRIMARY KEY(ID, B_ID))";
 
             stm.execute(query);
             stm.close();
@@ -239,10 +244,9 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table RESERVED("
-            + "ROOM_NUMB INT NOT NULL,"
-            + "B_ID INT NOT NULL,"
-            + "PRIMARY KEY(ROOM_NUMB) REFERENCES ROOM(ROOM_ID),"
-            + "PRIMARY KEY(B_ID) REFERENCES ONLINEBOOKING(B_ID))";
+            + "ROOM_NUMB INT NOT NULL REFERENCES ROOM(ROOM_ID),"
+            + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID),"
+            + "PRIMARY KEY(ROOM_NUMB, B_ID))";
 
         stm.execute(query);
         stm.close();
@@ -260,10 +264,9 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table EXTRAS("
-            + "A_ID INT NOT NULL,"
-            + "B_ID INT NOT NULL,"
-            + "PRIMARY KEY(A_ID) REFERENCES AMENITIES(ID),"
-            + "PRIMARY KEY(B_ID) REFERENCES ONLINEBOOKING(B_ID))";
+            + "A_ID INT NOT NULL REFERENCES AMENITIES(ID),"
+            + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID) ,"
+            + "PRIMARY KEY(A_ID, B_ID))";
 
         stm.execute(query);
         stm.close();
@@ -280,10 +283,9 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table PARKED("
-            + "E_ID INT NOT NULL,"
-            + "ID INT NOT NULL,"
-            + "PRIMARY KEY(E_ID) REFERENCES EMPLOYEE(E_ID),"
-            + "PRIMARY KEY(ID) REFERENCES CUSTOMER(ID))";
+            + "E_ID INT NOT NULL REFERENCES EMPLOYEE(E_ID),"
+            + "ID INT NOT NULL REFERENCES CUSTOMER(ID),"
+            + "PRIMARY KEY(E_ID, ID))";
             
         stm.execute(query);
         stm.close();
@@ -299,10 +301,9 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table INUSE("
-            + "L_PLATE VARCHAR(20) NOT NULL,"
-            + "SPOT_NUMBER INT NOT NULL,"
-            + "PRIMARY KEY(L_PLATE) REFERENCES VALET(L_PLATE),"
-            + "PRIMARY KEY(SPOT_NUMBER) REFERENCES PARKINGSPOT(SPOT_NUMBER))";
+            + "L_PLATE VARCHAR(20) NOT NULL REFERENCES VALET(L_PLATE),"
+            + "SPOT_NUMBER INT NOT NULL REFERENCES PARKINGSPOT(SPOT_NUMBER),"
+            + "PRIMARY KEY(L_PLATE, SPOT_NUMBER))";
 
         stm.execute(query);
         stm.close();
