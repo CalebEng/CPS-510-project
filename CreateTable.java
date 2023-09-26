@@ -59,7 +59,7 @@ public class CreateTable {
         createOnlineBookingTable(con);
         createValetTable(con);
         //-------------------------------------------------------------------------
-        
+       
         con.close();
     }
 
@@ -175,7 +175,10 @@ public class CreateTable {
             + "CHECK_IN date NOT NULL,"
             + "CHECK_OUT date NOT NULL,"
             + "ROOM_ID INT NOT NULL,"
+            + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
+            + "FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ROOM_ID),"
             + "PRIMARY KEY (B_ID))";
+
         stm.execute(query);
         stm.close();
         System.out.println("Online Booking table Created...");
@@ -194,7 +197,10 @@ public class CreateTable {
             + "L_PLATE INT NOT NULL,"
             + "ID INT NOT NULL,"
             + "E_ID INT NOT NULL,"
+            + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
+            + "FOREIGN KEY (E_ID) REFERENCES EMPLOYEE(E_ID),"
             + "PRIMARY KEY (L_PLATE))";
+
         stm.execute(query);
         stm.close();
         System.out.println("Valet table Created...");
