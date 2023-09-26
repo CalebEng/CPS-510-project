@@ -196,9 +196,11 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table VALET("
-            + "L_PLATE INT NOT NULL,"
+            + "L_PLATE VARCHAR(20) NOT NULL,"
             + "ID INT NOT NULL,"
             + "E_ID INT NOT NULL,"
+            + "SPOT_NUMB INT NOT NULL"
+            + "FOREIGN KEY (SPOT_NUMB) REFERENCES PARKINGSPOT(SPOT_NUMBER),"
             + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
             + "FOREIGN KEY (E_ID) REFERENCES EMPLOYEE(E_ID),"
             + "PRIMARY KEY (L_PLATE))";
@@ -207,4 +209,104 @@ public class CreateTable {
         stm.close();
         System.out.println("Valet table Created...");
     }
+
+
+    /**
+     * Creates the booked realation table, only call once
+     * @param con
+     * @throws SQLException
+     */
+    private static void createBooked(Connection con)throws SQLException{
+        Statement stm = con.createStatement();
+
+        String query = "create table BOOKED("
+            + "ID INT NOT NULL,"
+            + "B_ID INT NOT NULL,"
+            + "PRIMARY KEY(ID) REFERENCES CUSTOMER(ID),"
+            + "PRIMARY KEY(B_ED) REFERENCES ONLINEBOOKING(B_ID))";
+
+            stm.execute(query);
+            stm.close();
+            System.out.println("Booked table Created...");
+    }   
+
+    /**
+     * Creates reserved table, only call once
+     * @param con
+     * @throws SQLException
+     */
+    private static void createResered(Connection con)throws SQLException{
+        Statement stm = con.createStatement();
+
+        String query = "create table RESERVED("
+            + "ROOM_NUMB INT NOT NULL,"
+            + "B_ID INT NOT NULL,"
+            + "PRIMARY KEY(ROOM_NUMB) REFERENCES ROOM(ROOM_ID),"
+            + "PRIMARY KEY(B_ID) REFERENCES ONLINEBOOKING(B_ID))";
+
+        stm.execute(query);
+        stm.close();
+        System.out.println("Reserved table Created...");
+    }
+
+
+
+    /**
+     * Creates extras table, only call once
+     * @param con
+     * @throws SQLException
+     */
+    private static void createExtras(Connection con)throws SQLException{
+        Statement stm = con.createStatement();
+
+        String query = "create table EXTRAS("
+            + "A_ID INT NOT NULL,"
+            + "B_ID INT NOT NULL,"
+            + "PRIMARY KEY(A_ID) REFERENCES AMENITIES(ID),"
+            + "PRIMARY KEY(B_ID) REFERENCES ONLINEBOOKING(B_ID))";
+
+        stm.execute(query);
+        stm.close();
+        System.out.println("Extras table Created...");
+    }
+
+
+    /**
+     * created parked table, only call once
+     * @param con
+     * @throws SQLException
+     */
+    private static void createParked(Connection con)throws SQLException{
+        Statement stm = con.createStatement();
+
+        String query = "create table PARKED("
+            + "E_ID INT NOT NULL,"
+            + "ID INT NOT NULL,"
+            + "PRIMARY KEY(E_ID) REFERENCES EMPLOYEE(E_ID),"
+            + "PRIMARY KEY(ID) REFERENCES CUSTOMER(ID))";
+            
+        stm.execute(query);
+        stm.close();
+        System.out.println("Parked table Created...");
+    }
+    
+    /**
+     * creates inuse tables, only call
+     * @param con
+     * @throws SQLException
+     */
+    private static void createINUSE(Connection con)throws SQLException{
+        Statement stm = con.createStatement();
+
+        String query = "create table INUSE("
+            + "L_PLATE VARCHAR(20) NOT NULL,"
+            + "SPOT_NUMBER INT NOT NULL,"
+            + "PRIMARY KEY(L_PLATE) REFERENCES VALET(L_PLATE),"
+            + "PRIMARY KEY(SPOT_NUMBER) REFERENCES PARKINGSPOT(SPOT_NUMBER))";
+
+        stm.execute(query);
+        stm.close();
+        System.out.println("INUSE table Created...");
+    }
 }
+
