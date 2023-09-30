@@ -59,7 +59,7 @@ public class CreateTable {
         //createOnlineBookingTable(con);
         //createValetTable(con);
         //createBooked(con);
-        //createReserved(con);
+        //createResered(con);
         //createExtras(con);
         //createParked(con);
         //createINUSE(con);
@@ -240,7 +240,7 @@ public class CreateTable {
      * @param con
      * @throws SQLException
      */
-    private static void createReserved(Connection con)throws SQLException{
+    private static void createResered(Connection con)throws SQLException{
         Statement stm = con.createStatement();
 
         String query = "create table RESERVED("
