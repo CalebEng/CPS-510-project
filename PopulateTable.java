@@ -53,11 +53,11 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
          */
 
          // all the main tables 
-         populateCustomer(con);
-         populateRoom(con);
-         populateEmployee(con);
-         populateParkingSpot(con);
-         populateAmenities(con);
+         //populateCustomer(con);
+         //populateRoom(con);
+         //populateEmployee(con);
+         //populateParkingSpot(con);
+         //populateAmenities(con);
          populateOnlineBooking(con);
          populateValet(con);
 
@@ -117,18 +117,19 @@ private static void populateRoom(Connection con) throws SQLException {
     }
 }
 
+
 //populates the employee table with data
 private static void populateEmployee(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
       stmt.executeUpdate("insert into EMPLOYEE (E_ID, NAME, PARTTIME_FULLTIME, D_O_H)" +
-                         "values(1111, 'Sasha Smith', 'Part-time', '2003-07-07')");
+                         "values(1111, 'Sasha Smith', 'Part_time', TO_DATE('2003-07-07','YYYY-MM-DD'))");
       stmt.executeUpdate("insert into EMPLOYEE (E_ID, NAME, PARTTIME_FULLTIME, D_O_H)" +
-                         "values(1678, 'Tim Ford', 'Full-time', '2012-06-27')");
+                         "values(1678, 'Tim Ford', 'Full_time', TO_DATE('2012-06-27','YYYY-MM-DD'))");
       stmt.executeUpdate("insert into EMPLOYEE (E_ID, NAME, PARTTIME_FULLTIME, D_O_H)" +
-                         "values(1000, 'Lizzy Grant', 'Part-time', '2007-02-02')");
+                         "values(1000, 'Lizzy Grant', 'Part_time', TO_DATE('2007-02-02','YYYY-MM-DD'))");
       stmt.executeUpdate("insert into EMPLOYEE (E_ID, NAME, PARTTIME_FULLTIME, D_O_H)" +
-                         "values(1357, 'Peter Maximoff', 'Full-time', '2021-03-08')");
-      con.close();
+                         "values(1357, 'Peter Maximoff', 'Full_time', TO_DATE('2021-03-08','YYYY-MM-DD'))");
+     
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -158,7 +159,7 @@ private static void populateParkingSpot(Connection con) throws SQLException {
       stmt.executeUpdate("insert into PARKINGSPOT (SPOT_NUMBER, AVALIABILITY)" +
                          "values(10, 'Available')");
      
-      con.close();
+    
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -178,7 +179,7 @@ private static void populateAmenities(Connection con) throws SQLException {
       stmt.executeUpdate("insert into AMENITIES (ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
                          "values(4, 'No', 'No', 'No', 'Yes')");
      
-      con.close();
+    
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -188,18 +189,16 @@ private static void populateAmenities(Connection con) throws SQLException {
 private static void populateOnlineBooking(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
       stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(12345, 1030707, 2, 2, '2023-07-06', '2023-07-08', 773)");
+                         "values(12345, 1030707, 2, 2, TO_DATE('2023-07-06','YYYY-MM-DD'), TO_DATE('2023-07-08','YYYY-MM-DD'), 773)");
       stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(11111, 1029384, 1, 4, '2023-12-02', '2023-12-12', 264)");
+                         "values(11111, 1029384, 1, 4, TO_DATE('2023-12-02','YYYY-MM-DD'), TO_DATE('2023-12-12','YYYY-MM-DD'), 264)");
       stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(45678, 1230948, 3, 2, '2023-09-29', '2023-09-30', 500)");
+                         "values(45678, 1230948, 3, 2, TO_DATE('2023-09-29','YYYY-MM-DD'), TO_DATE('2023-09-30','YYYY-MM-DD'), 500)");
       stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(32121, 1031011, 4, 4, '2023-10-06', '2023-10-11', 360)");
+                         "values(32121, 1031011, 4, 4, TO_DATE('2023-10-06','YYYY-MM-DD'), TO_DATE('2023-10-11','YYYY-MM-DD'), 360)");
       stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(23456, 1031213, 0, 1, '2023-04-17', '2023-04-19', 200)");
+                         "values(23456, 1031213, 0, 1, TO_DATE('2023-04-17','YYYY-MM-DD'), TO_DATE('2023-04-19','YYYY-MM-DD'), 200)");
       
-     
-      con.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -215,7 +214,7 @@ private static void populateValet(Connection con) throws SQLException {
       stmt.executeUpdate("insert into VALET (L_PLATE, ID, E_ID, SPOT_NUMB)" +
                          "values('SLAY-377', 1030707, 1000, 3)");
      
-      con.close();
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -235,7 +234,7 @@ private static void populateBooked(Connection con) throws SQLException {
       stmt.executeUpdate("insert into BOOKED (ID, B_ID)" +
                          "values(1031213, 23456)");
      
-      con.close();
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -255,7 +254,7 @@ private static void populateReserved(Connection con) throws SQLException {
       stmt.executeUpdate("insert into RESERVED (ROOM_NUMB, B_ID)" +
                          "values(200, 23456)");
      
-      con.close();
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -275,7 +274,7 @@ private static void populateExtras(Connection con) throws SQLException {
       stmt.executeUpdate("insert into EXTRAS (A_ID, B_ID)" +
                          "values(0, 23456)");
      
-      con.close();
+   
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -291,7 +290,7 @@ private static void populateParked(Connection con) throws SQLException {
       stmt.executeUpdate("insert into PARKED (E_ID, ID)" +
                          "values(1000, 1030707)");
      
-      con.close();
+ 
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -307,7 +306,7 @@ private static void populateInuse(Connection con) throws SQLException {
       stmt.executeUpdate("insert into INUSE (L_PLATE, SPOT_NUMBER)" +
                          "values('SLAY-377', 3)");
      
-      con.close();
+   
     } catch (SQLException e) {
       e.printStackTrace();
     }
