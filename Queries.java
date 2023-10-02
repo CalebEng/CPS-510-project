@@ -47,12 +47,32 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
         System.out.println("Connection successful!");
 
 
+        // all the main tables 
+         //populateCustomer(con);       x <-- means we made a query for it
+         //populateRoom(con);           x
+         //populateEmployee(con);       x
+         //populateParkingSpot(con);    x
+         //populateAmenities(con);      x
+         //populateOnlineBooking(con);  x
+         //populateValet(con);          x
+
+         // and the relationship tables
+         //populateBooked(con);         
+         //populateReserved(con);       
+         //populateExtras(con);         
+         //populateParked(con);         
+         //populateInuse(con);          
+
         getCustomers(con);
         getValetCustomers(con);
         getEmployees(con);
         getDOH(con);
         getKing(con);
         getKingVacant(con);
+        getParkingSpots(con);
+        getOnlineBookings(con);
+        getRoomService(con);
+
         con.close();
 
 
@@ -70,10 +90,10 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
         ResultSet rs = stm.executeQuery();
 
         ResultSetMetaData data = rs.getMetaData();
-        int feildNumb = data.getColumnCount();
+        int fieldNumb = data.getColumnCount();
         
         while (rs.next()){
-            for(int i =1;i<=feildNumb;i++){
+            for(int i =1;i<=fieldNumb;i++){
                 if (i>1){
                     
                     System.out.print(" | ");
@@ -99,10 +119,10 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
         ResultSet rs = stm.executeQuery();
 
         ResultSetMetaData data = rs.getMetaData();
-        int feildNumb = data.getColumnCount();
+        int fieldNumb = data.getColumnCount();
         
         while (rs.next()){
-            for(int i =1;i<=feildNumb;i++){
+            for(int i =1;i<=fieldNumb;i++){
                 if (i>1){
                     
                     System.out.print(" | ");
@@ -130,10 +150,10 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
         ResultSet rs = stm.executeQuery();
 
         ResultSetMetaData data = rs.getMetaData();
-        int feildNumb = data.getColumnCount();
+        int fieldNumb = data.getColumnCount();
         
         while (rs.next()){
-            for(int i =1;i<=feildNumb;i++){
+            for(int i =1;i<=fieldNumb;i++){
                 if (i>1){
                     
                     System.out.print(" | ");
@@ -160,10 +180,10 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
         ResultSet rs = stm.executeQuery();
 
         ResultSetMetaData data = rs.getMetaData();
-        int feildNumb = data.getColumnCount();
+        int fieldNumb = data.getColumnCount();
         
         while (rs.next()){
-            for(int i =1;i<=feildNumb;i++){
+            for(int i =1;i<=fieldNumb;i++){
                 if (i>1){
                     
                     System.out.print(" | ");
@@ -190,10 +210,10 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
         ResultSet rs = stm.executeQuery();
 
         ResultSetMetaData data = rs.getMetaData();
-        int feildNumb = data.getColumnCount();
+        int fieldNumb = data.getColumnCount();
         
         while (rs.next()){
-            for(int i =1;i<=feildNumb;i++){
+            for(int i =1;i<=fieldNumb;i++){
                 if (i>1){
                     
                     System.out.print(" | ");
@@ -220,10 +240,100 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
         ResultSet rs = stm.executeQuery();
 
         ResultSetMetaData data = rs.getMetaData();
-        int feildNumb = data.getColumnCount();
+        int fieldNumb = data.getColumnCount();
         
         while (rs.next()){
-            for(int i =1;i<=feildNumb;i++){
+            for(int i =1;i<=fieldNumb;i++){
+                if (i>1){
+                    
+                    System.out.print(" | ");
+                    
+                }
+                System.out.print(data.getColumnName(i)+": ");
+                System.out.print(rs.getString(i));
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * gets all parking spots that are available
+     * @param con
+     * @throws SQLException
+     */
+    private static void getParkingSpots(Connection con)throws SQLException{
+        System.out.println("All free parking spots:");
+        String q= "SELECT * FROM PARKINGSPOT WHERE AVALIABILITY=('Available')";
+        PreparedStatement stm = con.prepareStatement(q);
+
+        ResultSet rs = stm.executeQuery();
+
+        ResultSetMetaData data = rs.getMetaData();
+        int fieldNumb = data.getColumnCount();
+        
+        while (rs.next()){
+            for(int i =1;i<=fieldNumb;i++){
+                if (i>1){
+                    
+                    System.out.print(" | ");
+                    
+                }
+                System.out.print(data.getColumnName(i)+": ");
+                System.out.print(rs.getString(i));
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * gets all online bookings
+     * @param con
+     * @throws SQLException
+     */
+    private static void getOnlineBookings(Connection con)throws SQLException{
+        System.out.println("All online bookings:");
+        String q= "SELECT * FROM ONLINEBOOKING";
+        PreparedStatement stm = con.prepareStatement(q);
+
+        ResultSet rs = stm.executeQuery();
+
+        ResultSetMetaData data = rs.getMetaData();
+        int fieldNumb = data.getColumnCount();
+        
+        while (rs.next()){
+            for(int i =1;i<=fieldNumb;i++){
+                if (i>1){
+                    
+                    System.out.print(" | ");
+                    
+                }
+                System.out.print(data.getColumnName(i)+": ");
+                System.out.print(rs.getString(i));
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * gets all bookings with room service
+     * @param con
+     * @throws SQLException
+     */
+    private static void getRoomService(Connection con)throws SQLException{
+        System.out.println("All bookings with room service:");
+        String q= "SELECT * FROM AMENITIES WHERE ROOM_SERVICE=('Yes')";
+        PreparedStatement stm = con.prepareStatement(q);
+
+        ResultSet rs = stm.executeQuery();
+
+        ResultSetMetaData data = rs.getMetaData();
+        int fieldNumb = data.getColumnCount();
+        
+        while (rs.next()){
+            for(int i =1;i<=fieldNumb;i++){
                 if (i>1){
                     
                     System.out.print(" | ");
