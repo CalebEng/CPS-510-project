@@ -57,11 +57,11 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
          //populateValet(con);          x
 
          // and the relationship tables
-         //populateBooked(con);         
-         //populateReserved(con);       
-         //populateExtras(con);         
-         //populateParked(con);         
-         //populateInuse(con);          
+         //populateBooked(con);         x
+         //populateReserved(con);       x
+         //populateExtras(con);         x
+         //populateParked(con);         x  
+         //populateInuse(con);          x
 
         getCustomers(con);
         getValetCustomers(con);
