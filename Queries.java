@@ -16,69 +16,6 @@ import java.util.Scanner;
 
 public class Queries{
 
-public static void main(String args[]) throws SQLException, FileNotFoundException{
-
-        //try to find jdbc divers
-        try {
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        } catch (SQLException e) {
-            System.out.println("Caught error: \n"+e);
-        }
-        
-        String oracleUrl = "jdbc:oracle:thin:@oracle.scs.ryerson.ca:1521:orcl";
-        
-        //getting user login info for the server
-        File userfile = new File("user.txt");
-        File passfile = new File("password.txt");
-        Scanner userScanner = new Scanner(userfile);
-        Scanner passScanner = new Scanner(passfile);
-        String username = "";
-        String password = "";
-        
-        while(userScanner.hasNextLine()){
-            username = userScanner.nextLine();
-            password = passScanner.nextLine();
-        }
-        userScanner.close();
-        passScanner.close();
-
-        //try to connect to server and create file
-        Connection con = DriverManager.getConnection(oracleUrl, username, password);
-        System.out.println("Connection successful!");
-
-
-        // all the main tables 
-         //populateCustomer(con);       x <-- means we made a query for it
-         //populateRoom(con);           x
-         //populateEmployee(con);       x
-         //populateParkingSpot(con);    x
-         //populateAmenities(con);      x
-         //populateOnlineBooking(con);  x
-         //populateValet(con);          x
-
-         // and the relationship tables
-         //populateBooked(con);         x
-         //populateReserved(con);       x
-         //populateExtras(con);         x
-         //populateParked(con);         x  
-         //populateInuse(con);          x
-
-        getCustomers(con);
-        getValetCustomers(con);
-        getEmployees(con);
-        getDOH(con);
-        getKing(con);
-        getKingVacant(con);
-        getParkingSpots(con);
-        getOnlineBookings(con);
-        getRoomService(con);
-
-        con.close();
-
-
-    }
-
-
 //NOTE THIS WILL NEED TO BE CHANGED WHEN THE TABLES ARE CHANGED TO 3NF OR BCNF AS THINGS WILL NO LONGER WORK LIKE THIS
 //WHEN THAT HAPPENS PLEASE MAKE THE APPROPRIATE CHANGES TO THE FUNCTIONS AFFECTED
     /**
