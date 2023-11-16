@@ -77,6 +77,40 @@ public static void main(String args[]) throws SQLException, FileNotFoundExceptio
 
 
     }
+
+
+//NOTE THIS WILL NEED TO BE CHANGED WHEN THE TABLES ARE CHANGED TO 3NF OR BCNF AS THINGS WILL NO LONGER WORK LIKE THIS
+//WHEN THAT HAPPENS PLEASE MAKE THE APPROPRIATE CHANGES TO THE FUNCTIONS AFFECTED
+    /**
+     * query all tables 
+     * @param con
+     * @throws SQLException
+     */
+    public static void queryAll(Connection con)throws SQLException{
+        getCustomers(con);
+        getValetCustomers(con);
+        getEmployees(con);
+        getDOH(con);
+        getKing(con);
+        getKingVacant(con);
+        getParkingSpots(con);
+        getOnlineBookings(con);
+        getRoomService(con);
+    }
+
+    /**
+     * Custom queries for the db. 
+     * should take in the connection and the user query q. 
+     * should make sure that q is a valid query
+     * if q is a valid query then it should proceed and run the query and print the result
+     * if q isn't a vlid query then it should say that it isn't valid and not print out anything else
+     * @param con
+     * @param q
+     * @throws SQLException
+     */
+    public static void customQuery(Connection con,String q)throws SQLException{
+
+    }
     /**
      * Gets the list of customers in the tables
      * @param con

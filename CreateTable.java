@@ -18,55 +18,26 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class CreateTable {
-    public static void main(String args[]) throws SQLException, FileNotFoundException{
-
-        //try to find jdbc divers
-        try {
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        } catch (SQLException e) {
-            System.out.println("Caught error: \n"+e);
-        }
+    /**
+     * Creates all tables at once.
+     * @param con
+     * @throws SQLException
+     */
+    public static void createAll(Connection con) throws SQLException{
         
-        String oracleUrl = "jdbc:oracle:thin:@oracle.scs.ryerson.ca:1521:orcl";
+        createCustomerTable(con);
+        createRoomTable(con);
+        createEmployeeTable(con);
+        createParkingSpotTable(con);
+        createAmenitiesTable(con);
+        createOnlineBookingTable(con);
+        createValetTable(con);
+        createBooked(con);
+        createReserved(con);
+        createExtras(con);
+        createParked(con);
+        createINUSE(con);
         
-        //getting user login info for the server
-        File userfile = new File("user.txt");
-        File passfile = new File("password.txt");
-        Scanner userScanner = new Scanner(userfile);
-        Scanner passScanner = new Scanner(passfile);
-        String username = "";
-        String password = "";
-        
-        while(userScanner.hasNextLine()){
-            username = userScanner.nextLine();
-            password = passScanner.nextLine();
-        }
-        userScanner.close();
-        passScanner.close();
-
-        //try to connect to server and create file
-        Connection con = DriverManager.getConnection(oracleUrl, username, password);
-        System.out.println("Connection successful!");
-        
-        //edit your needed createtion calls here. only call them once each. 
-        //comment the ones you dont need out.
-        //-------------------------------------------------------------------------
-        //createCustomerTable(con);
-        //createRoomTable(con);
-        //createEmployeeTable(con);
-        //createParkingSpotTable(con);
-        //createAmenitiesTable(con);
-        //createOnlineBookingTable(con);
-        //createValetTable(con);
-        //createBooked(con);
-        //createReserved(con);
-        //createExtras(con);
-        //createParked(con);
-        //createINUSE(con);
-        //-------------------------------------------------------------------------
-       
-
-        con.close();
     }
 
     /**
@@ -266,7 +237,7 @@ public class CreateTable {
         String query = "create table EXTRAS("
             + "A_ID INT NOT NULL REFERENCES AMENITIES(ID),"
             + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID) ,"
-            + "PRIMARY KEY(A_ID, B_ID))";
+            + "PRIMARY KEY(B_ID))";
 
         stm.execute(query);
         stm.close();

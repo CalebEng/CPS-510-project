@@ -16,61 +16,6 @@ import java.util.Scanner;
 
 public class PopulateTable {
 
-public static void main(String args[]) throws SQLException, FileNotFoundException{
-
-        //try to find jdbc divers
-        try {
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        } catch (SQLException e) {
-            System.out.println("Caught error: \n"+e);
-        }
-        
-        String oracleUrl = "jdbc:oracle:thin:@oracle.scs.ryerson.ca:1521:orcl";
-        
-        //getting user login info for the server
-        File userfile = new File("user.txt");
-        File passfile = new File("password.txt");
-        Scanner userScanner = new Scanner(userfile);
-        Scanner passScanner = new Scanner(passfile);
-        String username = "";
-        String password = "";
-        
-        while(userScanner.hasNextLine()){
-            username = userScanner.nextLine();
-            password = passScanner.nextLine();
-        }
-        userScanner.close();
-        passScanner.close();
-
-        //try to connect to server and create file
-        Connection con = DriverManager.getConnection(oracleUrl, username, password);
-        System.out.println("Connection successful!");
-        
-        /*
-         * just like the create table file, comment the tables out 
-         * once they have been populated or I think they will double 
-         * populate them and that would just be silly
-         */
-
-         // all the main tables 
-         //populateCustomer(con);
-         //populateRoom(con);
-         //populateEmployee(con);
-         //populateParkingSpot(con);
-         //populateAmenities(con);
-         populateOnlineBooking(con);
-         populateValet(con);
-
-         // and the relationship tables
-         populateBooked(con);
-         populateReserved(con);
-         populateExtras(con);
-         populateParked(con);
-         populateInuse(con);
-
-        con.close();
-    }
-
 //populates the customer table with data
 private static void populateCustomer(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
@@ -313,4 +258,29 @@ private static void populateInuse(Connection con) throws SQLException {
 }
 
 
+//NOTE THIS WILL NEED TO BE CHANGES IF MORE TABLES ARE ADDED TO MAKE DB 3NF/BCNF 
+//PLEASE CREATE AND FOLLOW THE FORMATTING OF THE OTHER POPULATE FUNCTIONS AND ADD THE FUNCTION CALL BELOW ACCORDINGLY
+/**
+ * Populates all tables
+ * @param con
+ * @throws SQLException
+ */
+
+public static void populateAll(Connection con) throws SQLException {
+  // all the main tables 
+    populateCustomer(con);
+    populateRoom(con);
+    populateEmployee(con);
+    populateParkingSpot(con);
+    populateAmenities(con);
+    populateOnlineBooking(con);
+    populateValet(con);
+
+    // and the relationship tables
+    populateBooked(con);
+    populateReserved(con);
+    populateExtras(con);
+    populateParked(con);
+    populateInuse(con);
+}
 }
