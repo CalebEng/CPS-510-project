@@ -19,16 +19,41 @@ public class PopulateTable {
 //populates the customer table with data
 private static void populateCustomer(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
-      stmt.executeUpdate("insert into CUSTOMER (ID, NAME, PHONE_NUMBER, CREDIT_CARD, VALET)" +
-                         "values(1029384, 'Joe Smith', 4161231234, 4444444444444444, 1)");
-      stmt.executeUpdate("insert into CUSTOMER (ID, NAME, PHONE_NUMBER, CREDIT_CARD, VALET)" +
-                         "values(1230948, 'Nancy Fancy', 6471231234, 1234123412341234, 1)");
-      stmt.executeUpdate("insert into CUSTOMER (ID, NAME, PHONE_NUMBER, CREDIT_CARD, VALET)" +
-                         "values(1030707, 'Theresa Slay', 6476476477, 7777777700003333, 1)");
-      stmt.executeUpdate("insert into CUSTOMER (ID, NAME, PHONE_NUMBER, CREDIT_CARD, VALET)" +
-                         "values(1031011, 'Caleb Belac', 4166471011, 1111222233334444, 0)");
-      stmt.executeUpdate("insert into CUSTOMER (ID, NAME, PHONE_NUMBER, CREDIT_CARD, VALET)" +
-                         "values(1031213, 'Jordan Jordan', 6471234567, 9999888877776666, 0)");
+      // CUS 1 - ID, PHONE_NUMBER, CREDIT_CARD, VALET
+      stmt.executeUpdate("insert into CUS1 (ID, PHONE_NUMBER, CREDIT_CARD, VALET)" +
+                         "values(1029384, 4161231234, 4444444444444444, 1)");
+      stmt.executeUpdate("insert into CUS1 (ID, PHONE_NUMBER, CREDIT_CARD, VALET)" +
+                         "values(1230948, 6471231234, 1234123412341234, 1)");
+      stmt.executeUpdate("insert into CUS1 (ID, PHONE_NUMBER, CREDIT_CARD, VALET)" +
+                         "values(1030707, 6476476477, 7777777700003333, 1)");
+      stmt.executeUpdate("insert into CUS1 (ID, PHONE_NUMBER, CREDIT_CARD, VALET)" +
+                         "values(1031011, 4166471011, 1111222233334444, 0)");
+      stmt.executeUpdate("insert into CUS1 (ID, PHONE_NUMBER, CREDIT_CARD, VALET)" +
+                         "values(1031213, 6471234567, 9999888877776666, 0)");
+
+      // CUS 2 - PHONE_NUMBER, NAME
+      stmt.executeUpdate("insert into CUS2 (PHONE_NUMBER, NAME)" +
+                         "values(4161231234, 'Joe Smith')");
+      stmt.executeUpdate("insert into CUS2 (PHONE_NUMBER, NAME)" +
+                         "values(6471231234, 'Nancy Fancy')");
+      stmt.executeUpdate("insert into CUS2 (PHONE_NUMBER, NAME)" +
+                         "values(6476476477, 'Theresa Slay')");
+      stmt.executeUpdate("insert into CUS2 (PHONE_NUMBER, NAME)" +
+                         "values(4166471011, 'Caleb Belac')");
+      stmt.executeUpdate("insert into CUS2 (PHONE_NUMBER, NAME)" +
+                         "values(6471234567,'Jordan Jordan')");
+
+      // CUS 3 - CREDIT_CARD, NAME
+      stmt.executeUpdate("insert into CUS3 (CREDIT_CARD, NAME)" +
+                         "values(4444444444444444, 'Joe Smith')");
+      stmt.executeUpdate("insert into CUS3 (CREDIT_CARD, NAME)" +
+                         "values(1234123412341234, 'Nancy Fancy')");
+      stmt.executeUpdate("insert into CUS3 (CREDIT_CARD, NAME)" +
+                         "values(7777777700003333, 'Theresa Slay')");
+      stmt.executeUpdate("insert into CUS3 (CREDIT_CARD, NAME)" +
+                         "values(1111222233334444, 'Caleb Belac')");
+      stmt.executeUpdate("insert into CUS3 (CREDIT_CARD, NAME)" +
+                         "values(9999888877776666, 'Jordan Jordan')");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -37,26 +62,50 @@ private static void populateCustomer(Connection con) throws SQLException {
 //populates the room table with data
 private static void populateRoom(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(500, 'King', 6, 'Occupied', 500)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(264, 'Suite', 4, 'Occupied', 400)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(773, 'HoneyMoon', 2, 'Occupied', 1000)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(100, 'Accessible', 4, 'Vacant', 200)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(444, 'Standard', 4, 'Vacant', 300)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(510, 'King', 6, 'Vacant', 500)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(200, 'Suite', 8, 'Occupied', 800)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(615, 'Queen', 4, 'Vacant', 600)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(150, 'Accessible', 4, 'Vacant', 200)");
-      stmt.executeUpdate("insert into ROOM (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY, PRICE)" +
-                         "values(360, 'Standard', 4, 'Occupied', 300)");
+     
+      // ROO1 - ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(500, 'King', 6, 'Occupied')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(264, 'Suite', 4, 'Occupied')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(773, 'HoneyMoon', 2, 'Occupied')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(100, 'Accessible', 6, 'Vacant')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(444, 'Standard', 5, 'Vacant')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(510, 'King', 8, 'Vacant')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(200, 'Suite', 8, 'Occupied')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(615, 'Queen', 4, 'Vacant')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(150, 'Accessible', 4, 'Vacant')");
+      stmt.executeUpdate("insert into ROO1 (ROOM_ID, ROOM_TYPE, CAPACITY, AVAILABILITY)" +
+                         "values(360, 'Standard', 4, 'Occupied')");
+
+      // ROO2 - ROOM_TYPE, CAPACITY, PRICE            
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('King', 6, 500)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('Suite', 4, 400)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('HoneyMoon', 2, 1000)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('Accessible', 6, 300)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('Standard', 5, 400)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('King', 8, 600)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('Suite', 8, 800)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('Queen', 4, 600)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('Accessible', 4, 200)");
+      stmt.executeUpdate("insert into ROO2 (ROOM_TYPE, CAPACITY, PRICE)" +
+                         "values('Standard', 4, 300)");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -113,15 +162,15 @@ private static void populateParkingSpot(Connection con) throws SQLException {
 //populates the amenities table with data
 private static void populateAmenities(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
-      stmt.executeUpdate("insert into AMENITIES (ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
+      stmt.executeUpdate("insert into AMENITIES (A_ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
                          "values(0, 'No', 'No', 'No', 'No')");
-      stmt.executeUpdate("insert into AMENITIES (ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
+      stmt.executeUpdate("insert into AMENITIES (A_ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
                          "values(1, 'Yes', 'No', 'No', 'No')");
-      stmt.executeUpdate("insert into AMENITIES (ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
+      stmt.executeUpdate("insert into AMENITIES (A_ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
                          "values(2, 'No', 'Yes', 'No', 'No')");
-      stmt.executeUpdate("insert into AMENITIES (ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
+      stmt.executeUpdate("insert into AMENITIES (A_ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
                          "values(3, 'No', 'No', 'Yes', 'No')");
-      stmt.executeUpdate("insert into AMENITIES (ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
+      stmt.executeUpdate("insert into AMENITIES (A_ID, GYM, POOL, ROOM_SERVICE, BREAKFAST)" +
                          "values(4, 'No', 'No', 'No', 'Yes')");
      
     
@@ -133,17 +182,31 @@ private static void populateAmenities(Connection con) throws SQLException {
 //populates the online booking table with data
 private static void populateOnlineBooking(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
-      stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(12345, 1030707, 2, 2, TO_DATE('2023-07-06','YYYY-MM-DD'), TO_DATE('2023-07-08','YYYY-MM-DD'), 773)");
-      stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(11111, 1029384, 1, 4, TO_DATE('2023-12-02','YYYY-MM-DD'), TO_DATE('2023-12-12','YYYY-MM-DD'), 264)");
-      stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(45678, 1230948, 3, 2, TO_DATE('2023-09-29','YYYY-MM-DD'), TO_DATE('2023-09-30','YYYY-MM-DD'), 500)");
-      stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(32121, 1031011, 4, 4, TO_DATE('2023-10-06','YYYY-MM-DD'), TO_DATE('2023-10-11','YYYY-MM-DD'), 360)");
-      stmt.executeUpdate("insert into ONLINEBOOKING (B_ID, ID, A_ID, NUMBER_OF_GUESTS, CHECK_IN, CHECK_OUT, ROOM_ID)" +
-                         "values(23456, 1031213, 0, 1, TO_DATE('2023-04-17','YYYY-MM-DD'), TO_DATE('2023-04-19','YYYY-MM-DD'), 200)");
+
+      //OB1 - B_ID, A_ID, CHECK_IN, CHECK_OUT, ROOM_ID
+      stmt.executeUpdate("insert into OB1 (B_ID, A_ID, CHECK_IN, CHECK_OUT, ROOM_ID)" +
+                         "values(12345, 2, TO_DATE('2023-07-06','YYYY-MM-DD'), TO_DATE('2023-07-08','YYYY-MM-DD'), 773)");
+      stmt.executeUpdate("insert into OB1 (B_ID, A_ID, CHECK_IN, CHECK_OUT, ROOM_ID)" +
+                         "values(11111, 1, TO_DATE('2023-12-02','YYYY-MM-DD'), TO_DATE('2023-12-12','YYYY-MM-DD'), 264)");
+      stmt.executeUpdate("insert into OB1 (B_ID, A_ID, CHECK_IN, CHECK_OUT, ROOM_ID)" +
+                         "values(45678, 3, TO_DATE('2023-09-29','YYYY-MM-DD'), TO_DATE('2023-09-30','YYYY-MM-DD'), 500)");
+      stmt.executeUpdate("insert into OB1 (B_ID, A_ID, CHECK_IN, CHECK_OUT, ROOM_ID)" +
+                         "values(32121, 4, TO_DATE('2023-10-06','YYYY-MM-DD'), TO_DATE('2023-10-11','YYYY-MM-DD'), 360)");
+      stmt.executeUpdate("insert into OB1 (B_ID, A_ID, CHECK_IN, CHECK_OUT, ROOM_ID)" +
+                         "values(23456, 0, TO_DATE('2023-04-17','YYYY-MM-DD'), TO_DATE('2023-04-19','YYYY-MM-DD'), 200)");
       
+      //OB2 - CHECK_IN, CHECK_OUT, ROOM_ID, ID, NUMBER_OF_GUESTS
+      stmt.executeUpdate("insert into OB2 (CHECK_IN, CHECK_OUT, ROOM_ID, ID, NUMBER_OF_GUESTS)" +
+                         "values(TO_DATE('2023-07-06','YYYY-MM-DD'), TO_DATE('2023-07-08','YYYY-MM-DD'), 773, 1030707, 2)");
+      stmt.executeUpdate("insert into OB2 (CHECK_IN, CHECK_OUT, ROOM_ID, ID, NUMBER_OF_GUESTS)" +
+                         "values(TO_DATE('2023-12-02','YYYY-MM-DD'), TO_DATE('2023-12-12','YYYY-MM-DD'), 264, 1029384, 4)");
+      stmt.executeUpdate("insert into OB2 (CHECK_IN, CHECK_OUT, ROOM_ID, ID, NUMBER_OF_GUESTS)" +
+                         "values(TO_DATE('2023-09-29','YYYY-MM-DD'), TO_DATE('2023-09-30','YYYY-MM-DD'), 500, 1230948, 2)");
+      stmt.executeUpdate("insert into OB2 (CHECK_IN, CHECK_OUT, ROOM_ID, ID, NUMBER_OF_GUESTS)" +
+                         "values(TO_DATE('2023-10-06','YYYY-MM-DD'), TO_DATE('2023-10-11','YYYY-MM-DD'), 360, 1031011, 4)");
+      stmt.executeUpdate("insert into OB2 (CHECK_IN, CHECK_OUT, ROOM_ID, ID, NUMBER_OF_GUESTS)" +
+                         "values(TO_DATE('2023-04-17','YYYY-MM-DD'), TO_DATE('2023-04-19','YYYY-MM-DD'), 200, 1031213, 1)");
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -152,13 +215,22 @@ private static void populateOnlineBooking(Connection con) throws SQLException {
 ////populates the valet table with data
 private static void populateValet(Connection con) throws SQLException {
     try (Statement stmt = con.createStatement()) {
-      stmt.executeUpdate("insert into VALET (L_PLATE, ID, E_ID, SPOT_NUMB)" +
-                         "values('CYBM-209', 1230948, 1357, 1)");
-      stmt.executeUpdate("insert into VALET (L_PLATE, ID, E_ID, SPOT_NUMB)" +
-                         "values('TRPD-101', 1029384, 1111, 2)");
-      stmt.executeUpdate("insert into VALET (L_PLATE, ID, E_ID, SPOT_NUMB)" +
-                         "values('SLAY-377', 1030707, 1000, 3)");
+      
+      //VAL1 - L_PLATE, ID, E_ID
+      stmt.executeUpdate("insert into VAL1 (L_PLATE, ID, E_ID)" +
+                         "values('CYBM-209', 1230948, 1357)");
+      stmt.executeUpdate("insert into VAL1 (L_PLATE, ID, E_ID)" +
+                         "values('TRPD-101', 1029384, 1111)");
+      stmt.executeUpdate("insert into VAL1 (L_PLATE, ID, E_ID)" +
+                         "values('SLAY-377', 1030707, 1000)");
      
+      //VAL2 - L_PLATE, SPOT_NUMB
+      stmt.executeUpdate("insert into VAL2 (L_PLATE, SPOT_NUMB)" +
+                         "values('CYBM-209', 1)");
+      stmt.executeUpdate("insert into VAL2 (L_PLATE, SPOT_NUMB)" +
+                         "values('TRPD-101', 2)");
+      stmt.executeUpdate("insert into VAL2 (L_PLATE, SPOT_NUMB)" +
+                         "values('SLAY-377', 3)");
 
     } catch (SQLException e) {
       e.printStackTrace();

@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.Scanner;
 import java.sql.Statement;
 
@@ -40,6 +41,7 @@ public class Main {
 
             //creating tables
             if(ans.equals("1")){
+            
                 CreateTable.createAll(con);
                 System.out.println("Tables Created...\nHit Enter to Continue...");
                 
@@ -69,6 +71,7 @@ public class Main {
             //query tables
             else if(ans.equals("3")){
                 Queries.queryAll(con);
+                
                 System.out.println("Queries ran...\nHit Enter to Continue...");
                 
                 while(true){
@@ -89,8 +92,12 @@ public class Main {
 
                 System.out.println("Enter Query: ");
                 String q = cus.nextLine();
-
-                Queries.customQuery(con, q);
+                
+                try {
+                    Queries.customQuery(con, q.toUpperCase());
+                } catch (SQLSyntaxErrorException e){
+                    System.out.println("This is an invalid query. Please hit enter, 4, then try again.");
+                }
 
                 System.out.println("Query ran...\nHit Enter to Continue...");
                 
