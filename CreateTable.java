@@ -46,32 +46,17 @@ public class CreateTable {
      * @throws SQLException
      */
     private static void createCustomerTable(Connection con) throws SQLException{
-        Statement stm1 = con.createStatement();
+        Statement stm = con.createStatement();
 
-        String query = "create table CUS1("
+        String query = "create table CUSTOMER("
             +"ID INT NOT NULL,"
+            +"NAME VARCHAR2(20) NOT NULL,"
             +"PHONE_NUMBER INT NOT NULL,"
             +"CREDIT_CARD INT NOT NULL,"
             +"VALET INT DEFAULT 0 NOT NULL,"
             +"PRIMARY KEY (ID))";
-        stm1.execute(query);
-        stm1.close();
-        
-        Statement stm2 = con.createStatement();
-        query = "create table CUS2("
-            +"PHONE_NUMBER INT NOT NULL,"
-            +"NAME VARCHAR2(20) NOT NULL,"
-            +"PRIMARY KEY (PHONE_NUMBER))";
-        stm2.execute(query);
-        stm2.close();
-
-        Statement stm3 = con.createStatement();
-        query = "create table CUS3("
-            +"CREDIT_CARD INT NOT NULL,"
-            +"NAME VARCHAR2(20) NOT NULL,"
-            +"PRIMARY KEY (CREDIT_CARD))";
-        stm3.execute(query);
-        stm3.close();
+        stm.execute(query);
+        stm.close();
         
         System.out.println("Customer table Created...");     
     }
@@ -82,27 +67,17 @@ public class CreateTable {
      * @throws SQLException
      */
     private static void createRoomTable(Connection con)throws SQLException{
-        Statement stm1 = con.createStatement();
+        Statement stm = con.createStatement();
 
-        String query = "create table ROO1(" 
+        String query = "create table ROOM(" 
             + "ROOM_ID INT NOT NULL,"
             + "ROOM_TYPE VARCHAR2(20) NOT NULL,"
             + "CAPACITY INT NOT NULL,"
             + "AVAILABILITY VARCHAR(20) DEFAULT 'Vacant',"
-            + "PRIMARY KEY (ROOM_ID))";
-        stm1.execute(query);
-        stm1.close();
-        System.out.println("Room table Created...");   
-
-        Statement stm2 = con.createStatement();
-
-        query = "create table ROO2(" 
-            + "ROOM_TYPE VARCHAR2(20) NOT NULL,"
-            + "CAPACITY INT NOT NULL,"
             + "PRICE INT NOT NULL,"
-            + "PRIMARY KEY (ROOM_ID, CAPACITY))";
-        stm2.execute(query);
-        stm2.close();
+            + "PRIMARY KEY (ROOM_ID))";
+        stm.execute(query);
+        stm.close();
         System.out.println("Room table Created...");   
     }
 
@@ -151,12 +126,12 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table AMENITIES(" 
-            + "A_ID INT NOT NULL,"
+            + "ID INT NOT NULL,"
             + "GYM VARCHAR(20) NOT NULL,"
             + "POOL VARCHAR(20) NOT NULL,"
             + "ROOM_SERVICE VARCHAR(20) NOT NULL,"
             + "BREAKFAST VARCHAR(20) NOT NULL,"
-            + "PRIMARY KEY (A_ID))";
+            + "PRIMARY KEY (ID))";
         stm.execute(query);
         stm.close();
         System.out.println("Amenities table Created..."); 
@@ -168,35 +143,23 @@ public class CreateTable {
      * @throws SQLException
      */
     private static void createOnlineBookingTable(Connection con)throws SQLException{
-        Statement stm1 = con.createStatement();
+        Statement stm = con.createStatement();
 
         String query = "create table ONLINEBOOKING("
             + "B_ID INT NOT NULL,"
-            + "A_ID INT NOT NULL,"
-            + "CHECK_IN date NOT NULL,"
-            + "CHECK_OUT date NOT NULL,"
-            + "ROOM_ID INT NOT NULL,"
-            + "FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ROOM_ID),"
-            + "FOREIGN KEY (A_ID) REFERENCES AMENITIES(ID),"
-            + "PRIMARY KEY (B_ID))";
-
-        stm1.execute(query);
-        stm1.close();
-
-        Statement stm2 = con.createStatement();
-
-        query = "create table ONLINEBOOKING("
             + "ID INT NOT NULL,"
+            + "A_ID INT NOT NULL,"
             + "NUMBER_OF_GUESTS INT NOT NULL,"
             + "CHECK_IN date NOT NULL,"
             + "CHECK_OUT date NOT NULL,"
             + "ROOM_ID INT NOT NULL,"
             + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
             + "FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ROOM_ID),"
-            + "PRIMARY KEY (CHECK_IN,CHECK_OUT,ROOM_ID))";
+            + "FOREIGN KEY (A_ID) REFERENCES AMENITIES(ID),"
+            + "PRIMARY KEY (B_ID))";
 
-        stm2.execute(query);
-        stm2.close();
+        stm.execute(query);
+        stm.close();
         System.out.println("Online Booking table Created...");
     }
 
@@ -207,30 +170,20 @@ public class CreateTable {
      * @throws SQLException
      */
     private static void createValetTable(Connection con)throws SQLException{
-        Statement stm1 = con.createStatement();
+        Statement stm = con.createStatement();
 
         String query = "create table VALET("
             + "L_PLATE VARCHAR(20) NOT NULL,"
             + "ID INT NOT NULL,"
             + "E_ID INT NOT NULL,"
-            + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
-            + "FOREIGN KEY (E_ID) REFERENCES EMPLOYEE(E_ID),"
-            + "PRIMARY KEY (L_PLATE, ID))";
-
-        stm1.execute(query);
-        stm1.close();
-
-        Statement stm2 = con.createStatement();
-
-        query = "create table VALET("
-            + "L_PLATE VARCHAR(20) NOT NULL,"
             + "SPOT_NUMB INT NOT NULL,"
             + "FOREIGN KEY (SPOT_NUMB) REFERENCES PARKINGSPOT(SPOT_NUMBER),"
+            + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
+            + "FOREIGN KEY (E_ID) REFERENCES EMPLOYEE(E_ID),"
             + "PRIMARY KEY (L_PLATE))";
 
-        stm2.execute(query);
-        stm2.close();
-
+        stm.execute(query);
+        stm.close();
         System.out.println("Valet table Created...");
     }
 
@@ -246,7 +199,7 @@ public class CreateTable {
         String query = "create table BOOKED("
             + "ID INT REFERENCES CUSTOMER(ID) NOT NULL,"
             + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID),"
-            + "PRIMARY KEY(B_ID))";
+            + "PRIMARY KEY(ID, B_ID))";
 
             stm.execute(query);
             stm.close();
@@ -264,7 +217,7 @@ public class CreateTable {
         String query = "create table RESERVED("
             + "ROOM_NUMB INT NOT NULL REFERENCES ROOM(ROOM_ID),"
             + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID),"
-            + "PRIMARY KEY(B_ID))";
+            + "PRIMARY KEY(ROOM_NUMB, B_ID))";
 
         stm.execute(query);
         stm.close();
@@ -316,7 +269,6 @@ public class CreateTable {
      * @throws SQLException
      */
     private static void createINUSE(Connection con)throws SQLException{
-        
         Statement stm = con.createStatement();
 
         String query = "create table INUSE("
