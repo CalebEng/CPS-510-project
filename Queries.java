@@ -46,31 +46,8 @@ public class Queries{
      * @throws SQLException
      */
     public static void customQuery(Connection con,String q)throws SQLException{
-        
-        
-        
-        PreparedStatement stm = con.prepareStatement(q);
 
-        ResultSet rs = stm.executeQuery();
-
-        ResultSetMetaData data = rs.getMetaData();
-        int fieldNumb = data.getColumnCount();
-        
-        while (rs.next()){
-            for(int i =1;i<=fieldNumb;i++){
-                if (i>1){
-                    
-                    System.out.print(" | ");
-                    
-                }
-                System.out.print(data.getColumnName(i)+": ");
-                System.out.print(rs.getString(i));
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
-
     /**
      * Gets the list of customers in the tables
      * @param con
@@ -78,7 +55,7 @@ public class Queries{
      */
     private static void getCustomers(Connection con)throws SQLException{
         System.out.println("All Customers:");
-        String q= "SELECT * FROM CUS1";
+        String q= "SELECT * FROM CUSTOMER";
         PreparedStatement stm = con.prepareStatement(q);
 
         ResultSet rs = stm.executeQuery();
@@ -108,7 +85,7 @@ public class Queries{
      */
     private static void getValetCustomers(Connection con)throws SQLException{
         System.out.println("All Customers with Valet:");
-        String q= "SELECT * FROM CUS1 WHERE VALET=(1)";
+        String q= "SELECT * FROM CUSTOMER WHERE VALET=(1)";
         PreparedStatement stm = con.prepareStatement(q);
         ResultSet rs = stm.executeQuery();
 
@@ -198,7 +175,7 @@ public class Queries{
      */
     private static void getKing(Connection con)throws SQLException{
         System.out.println("All King Suites:");
-        String q= "SELECT * FROM ROO1 WHERE ROOM_TYPE=('King')";
+        String q= "SELECT * FROM ROOM WHERE ROOM_TYPE=('King')";
         PreparedStatement stm = con.prepareStatement(q);
 
         ResultSet rs = stm.executeQuery();
@@ -228,7 +205,7 @@ public class Queries{
      */
     private static void getKingVacant(Connection con)throws SQLException{
         System.out.println("All Vacant King Rooms:");
-        String q= "SELECT * FROM ROO1 WHERE AVAILABILITY=('Vacant') AND ROOM_TYPE=('King')";
+        String q= "SELECT * FROM ROOM WHERE AVAILABILITY=('Vacant') AND ROOM_TYPE=('King')";
         PreparedStatement stm = con.prepareStatement(q);
 
         ResultSet rs = stm.executeQuery();
@@ -288,7 +265,7 @@ public class Queries{
      */
     private static void getOnlineBookings(Connection con)throws SQLException{
         System.out.println("All online bookings:");
-        String q= "SELECT * FROM OB1";
+        String q= "SELECT * FROM ONLINEBOOKING";
         PreparedStatement stm = con.prepareStatement(q);
 
         ResultSet rs = stm.executeQuery();

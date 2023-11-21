@@ -24,7 +24,7 @@ public class deleteTable {
      */
     public static void dropAll(Connection con){
         try (Statement stmt = con.createStatement()) {
-             String[] tables = {"AMENITIES","BOOKED","CUS1","CUS2","CUS3","EMPLOYEE","EXTRAS","INUSE","OB1","OB2","PARKED","PARKINGSPOT","RESERVED","ROO1","ROO2","VAL1","VAL2"};
+             String[] tables = {"AMENITIES","BOOKED","CUSTOMER","EMPLOYEE","EXTRAS","INUSE","ONLINEBOOKING","PARKED","PARKINGSPOT","RESERVED","ROOM","VALET"};
 
             String q = "DROP TABLE ";
             for(int i =0;i<tables.length;i++){

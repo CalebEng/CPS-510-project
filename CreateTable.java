@@ -50,8 +50,8 @@ public class CreateTable {
 
         String query = "create table CUS1("
             +"ID INT NOT NULL,"
-            +"PHONE_NUMBER INT NOT NULL UNIQUE,"
-            +"CREDIT_CARD INT NOT NULL UNIQUE,"
+            +"PHONE_NUMBER INT NOT NULL,"
+            +"CREDIT_CARD INT NOT NULL,"
             +"VALET INT DEFAULT 0 NOT NULL,"
             +"PRIMARY KEY (ID))";
         stm1.execute(query);
@@ -61,8 +61,7 @@ public class CreateTable {
         query = "create table CUS2("
             +"PHONE_NUMBER INT NOT NULL,"
             +"NAME VARCHAR2(20) NOT NULL,"
-            +"PRIMARY KEY (PHONE_NUMBER),"
-            +"FOREIGN KEY (PHONE_NUMBER) REFERENCES CUS1(PHONE_NUMBER))" ;
+            +"PRIMARY KEY (PHONE_NUMBER))";
         stm2.execute(query);
         stm2.close();
 
@@ -70,8 +69,7 @@ public class CreateTable {
         query = "create table CUS3("
             +"CREDIT_CARD INT NOT NULL,"
             +"NAME VARCHAR2(20) NOT NULL,"
-            +"PRIMARY KEY (CREDIT_CARD),"
-            +"FOREIGN KEY (CREDIT_CARD) REFERENCES CUS1(CREDIT_CARD))" ;
+            +"PRIMARY KEY (CREDIT_CARD))";
         stm3.execute(query);
         stm3.close();
         
@@ -102,9 +100,7 @@ public class CreateTable {
             + "ROOM_TYPE VARCHAR2(20) NOT NULL,"
             + "CAPACITY INT NOT NULL,"
             + "PRICE INT NOT NULL,"
-            + "PRIMARY KEY (ROOM_TYPE, CAPACITY),"
-            + "FOREIGN KEY (ROOM_TYPE) REFERENCES ROO1 (ROOM_TYPE)"
-            + "FOREIGN KEY (CAPACITY) REFERENCES ROO1 (CAPACITY))";
+            + "PRIMARY KEY (ROOM_ID, CAPACITY))";
         stm2.execute(query);
         stm2.close();
         System.out.println("Room table Created...");   
@@ -180,8 +176,8 @@ public class CreateTable {
             + "CHECK_IN date NOT NULL,"
             + "CHECK_OUT date NOT NULL,"
             + "ROOM_ID INT NOT NULL,"
-            + "FOREIGN KEY (ROOM_ID) REFERENCES ROO1(ROOM_ID),"
-            + "FOREIGN KEY (A_ID) REFERENCES AMENITIES(A_ID),"
+            + "FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ROOM_ID),"
+            + "FOREIGN KEY (A_ID) REFERENCES AMENITIES(ID),"
             + "PRIMARY KEY (B_ID))";
 
         stm1.execute(query);
@@ -190,15 +186,13 @@ public class CreateTable {
         Statement stm2 = con.createStatement();
 
         query = "create table OB2("
+            + "ID INT NOT NULL,"
+            + "NUMBER_OF_GUESTS INT NOT NULL,"
             + "CHECK_IN date NOT NULL,"
             + "CHECK_OUT date NOT NULL,"
             + "ROOM_ID INT NOT NULL,"
-            + "ID INT NOT NULL,"
-            + "NUMBER_OF_GUESTS INT NOT NULL,"
             + "FOREIGN KEY (ID) REFERENCES CUSTOMER(ID),"
-            + "FOREIGN KEY (ROOM_ID) REFERENCES ROO1(1ROOM_ID),"
-            + "FOREIGN KEY (CHECK_IN) REFERENCES ROO1(CHECK_IN),"
-            + "FOREIGN KEY (CHECK_OUT) REFERENCES ROO1(CHECK_OUT),"
+            + "FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ROOM_ID),"
             + "PRIMARY KEY (CHECK_IN,CHECK_OUT,ROOM_ID))";
 
         stm2.execute(query);
@@ -250,8 +244,8 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table BOOKED("
-            + "ID INT REFERENCES CUS1(ID) NOT NULL,"
-            + "B_ID INT NOT NULL REFERENCES OB1(B_ID),"
+            + "ID INT REFERENCES CUSTOMER(ID) NOT NULL,"
+            + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID),"
             + "PRIMARY KEY(B_ID))";
 
             stm.execute(query);
@@ -268,8 +262,8 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table RESERVED("
-            + "ROOM_NUMB INT NOT NULL REFERENCES ROO1(ROOM_ID),"
-            + "B_ID INT NOT NULL REFERENCES OB1(B_ID),"
+            + "ROOM_NUMB INT NOT NULL REFERENCES ROOM(ROOM_ID),"
+            + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID),"
             + "PRIMARY KEY(B_ID))";
 
         stm.execute(query);
@@ -288,8 +282,8 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table EXTRAS("
-            + "A_ID INT NOT NULL REFERENCES AMENITIES(A_ID),"
-            + "B_ID INT NOT NULL REFERENCES OB1(B_ID) ,"
+            + "A_ID INT NOT NULL REFERENCES AMENITIES(ID),"
+            + "B_ID INT NOT NULL REFERENCES ONLINEBOOKING(B_ID) ,"
             + "PRIMARY KEY(B_ID))";
 
         stm.execute(query);
@@ -308,7 +302,7 @@ public class CreateTable {
 
         String query = "create table PARKED("
             + "E_ID INT NOT NULL REFERENCES EMPLOYEE(E_ID),"
-            + "ID INT NOT NULL REFERENCES CUS1(ID),"
+            + "ID INT NOT NULL REFERENCES CUSTOMER(ID),"
             + "PRIMARY KEY(E_ID, ID))";
             
         stm.execute(query);
@@ -326,7 +320,7 @@ public class CreateTable {
         Statement stm = con.createStatement();
 
         String query = "create table INUSE("
-            + "L_PLATE VARCHAR(20) NOT NULL REFERENCES VAL1(L_PLATE),"
+            + "L_PLATE VARCHAR(20) NOT NULL REFERENCES VALET(L_PLATE),"
             + "SPOT_NUMBER INT NOT NULL REFERENCES PARKINGSPOT(SPOT_NUMBER),"
             + "PRIMARY KEY(L_PLATE, SPOT_NUMBER))";
 
