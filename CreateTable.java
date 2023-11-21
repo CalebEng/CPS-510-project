@@ -170,7 +170,7 @@ public class CreateTable {
     private static void createOnlineBookingTable(Connection con)throws SQLException{
         Statement stm1 = con.createStatement();
 
-        String query = "create table OB1("
+        String query = "create table ONLINEBOOKING("
             + "B_ID INT NOT NULL,"
             + "A_ID INT NOT NULL,"
             + "CHECK_IN date NOT NULL,"
@@ -185,7 +185,7 @@ public class CreateTable {
 
         Statement stm2 = con.createStatement();
 
-        query = "create table OB2("
+        query = "create table ONLINEBOOKING("
             + "ID INT NOT NULL,"
             + "NUMBER_OF_GUESTS INT NOT NULL,"
             + "CHECK_IN date NOT NULL,"
@@ -209,7 +209,7 @@ public class CreateTable {
     private static void createValetTable(Connection con)throws SQLException{
         Statement stm1 = con.createStatement();
 
-        String query = "create table VAL1("
+        String query = "create table VALET("
             + "L_PLATE VARCHAR(20) NOT NULL,"
             + "ID INT NOT NULL,"
             + "E_ID INT NOT NULL,"
@@ -222,7 +222,7 @@ public class CreateTable {
 
         Statement stm2 = con.createStatement();
 
-        query = "create table VAL2("
+        query = "create table VALET("
             + "L_PLATE VARCHAR(20) NOT NULL,"
             + "SPOT_NUMB INT NOT NULL,"
             + "FOREIGN KEY (SPOT_NUMB) REFERENCES PARKINGSPOT(SPOT_NUMBER),"
